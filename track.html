@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Your Order</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2em;
+            color: #111;
+        }
+
+        .tracker {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+            width: 70%;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            background-color: #11192b;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        button:hover {
+            background-color: #0b1320;
+        }
+
+        .sample-ids {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Track Your Order</h1>
+        <p>Enter your tracking ID to see real-time delivery status and estimated arrival time</p>
+        <div class="tracker">
+            <input type="text" id="trackingId" placeholder="Enter tracking ID (e.g., DRM001234)" />
+            <button onclick="trackOrder()">
+                <span class="icon">🔍</span> Track
+            </button>
+        </div>
+        <p class="sample-ids">
+            Try tracking IDs: <strong>DRM001234</strong> (in transit) or <strong>DRM005678</strong> (delivered)
+        </p>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function trackOrder() {
+  const trackingId = document.getElementById("trackingId").value.trim();
+  const result = document.getElementById("result");
+
+  if (trackingId === "") {
+    result.textContent = "Please enter a tracking ID.";
+    result.style.color = "red";
+    return;
+  }
+
+  // Simulate tracking results
+  switch (trackingId.toUpperCase()) {
+    case "DRM001234":
+      result.textContent = "Status: In Transit. Expected delivery in 2 days.";
+      result.style.color = "green";
+      break;
+    case "DRM005678":
+      result.textContent = "Status: Delivered on June 10.";
+      result.style.color = "blue";
+      break;
+    default:
+      result.textContent = "Tracking ID not found. Please try again.";
+      result.style.color = "red";
+      break;
+  }
+}
+
+    </script>
+</body>
+
+</html>

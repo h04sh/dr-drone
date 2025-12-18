@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Medicines - Dr. Drone Medical</title>
+  <style>
+    body { font-family: Arial; margin: 0; padding: 20px; }
+    h1 { text-align: center; }
+    .medicine-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Available Medicines</h1>
+  <div class="medicine-container" id="medicine-list"></div>
+  <a href="cart.html"><button style="margin-top: 30px;">Go to Cart</button></a>
+
+  <script>
+    const medicines = [
+  { id: 1, name: "Paracetamol", price: 20, image: "assets/imgeas/dettol-antiseptic-liquid-bottle-of-550-ml-2-1669710729.webp" },
+  { id: 2, name: "Amoxicillin", price: 50, image: "assets/imgeas/dol0026_1-.webp" },
+  { id: 3, name: "Ibuprofen", price: 30, image: "assets/imgeas/ecosprin-75mg-strip-of-14-tablets-1-1647434835.webp" },
+  { id: 4, name: "Cough Syrup", price: 60, image: "assets/imgeas/pharmeasy-multivitamin-multimineral-immunity-booster-complete-nutrition-bottle-of-60-2-1698386136.webp" }
+];
+
+
+    const container = document.getElementById('medicine-list');
+
+    medicines.forEach(med => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <img src="${med.image}" alt="${med.name}" style="width:100%; height:150px; object-fit:contain;">
+    <h3>${med.name}</h3>
+    <p>Price: ₹${med.price}</p>
+    <button onclick="addToCart(${med.id}, '${med.name}', ${med.price})">Add to Cart</button>
+  `;
+  container.appendChild(card);
+});
+
+
+    function addToCart(id, name, price) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push({ id, name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${name} added to cart!`);
+    }
+  </script>
+</body>
+</html>
